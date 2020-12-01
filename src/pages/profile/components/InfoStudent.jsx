@@ -1,14 +1,60 @@
+import { useState } from "react";
+
 const InfoStudent = () => {
+  let [form, setForm] = useState({
+    name: "Tran Nghia",
+    phone: "0989596813",
+    facebook: "https://facebook.com",
+    skype: "trannghia2018",
+  });
+
+  function inputChange(e) {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
+  }
+  function handleSubmit() {
+    let flag = true;
+    if (form.name === "" || form.name == null) {
+      console.log("Ten khong duoc bo trong");
+      flag = false;
+    }
+    if (!/(03|07|08|09|01[2|6|8|9])+([0-9]{8})\b/.test(form.phone)) {
+      console.log("So dien thoai khong dung dinh dang");
+      flag = false;
+    }
+    if (form.skype === "" || form.skype == null) {
+      console.log("Skype khong hop le ");
+      flag = false;
+    }
+    if(form.facebook === '' || form.facebook == null || !/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/.test(form.facebook))
+    {
+        console.log("Link facebook kh dung dinh dang");
+        flag=false;
+    }
+    if (flag) {
+      console.log("Submit");
+    }
+  }
   return (
     <div className="tab__content-1 tabct active" style={{ display: "block" }}>
       <form action="/" method="POST">
         <div className="field">
           <label>Họ và Tên</label>
-          <input type="text" name="title" value="Tran Nghia" />
+          <input 
+            type="text" 
+            onChange={inputChange}
+            name="name" 
+            value={form.name} />
         </div>
         <div className="field">
           <label>Số điện thoại*</label>
-          <input type="text" name="phone" value="0989596813" />
+          <input 
+            type="text" 
+            onChange={inputChange}
+            name="phone" 
+            value={form.phone} />
         </div>
         <div className="field">
           <label>Email</label>
@@ -21,13 +67,21 @@ const InfoStudent = () => {
         </div>
         <div className="field">
           <label>Facebook</label>
-          <input type="text" name="facebook" value="https://facebook.com" />
+          <input 
+            type="text" 
+            onChange={inputChange}
+            name="facebook" 
+            value={form.facebook} />
         </div>
         <div className="field">
           <label>Skype</label>
-          <input type="text" name="skype" value="trannghia2018" />
+          <input 
+            type="text" 
+            onChange={inputChange}
+            name="skype" 
+            value={form.skype} />
         </div>
-        <div className="btn-register btn-save">LƯU LẠI</div>
+        <div onClick={handleSubmit} className="btn-register btn-save">LƯU LẠI</div>
       </form>
     </div>
   );

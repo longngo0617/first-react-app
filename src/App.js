@@ -16,12 +16,12 @@ function App() {
         <Header/>
         <main>
           {/* <Home/> */}
-          {/* <Profile/> */}
+          <Profile/>
           {/* <CourseDetails/> */}
           {/* <Register/> */}
           {/* <RegisterSuccess/> */}
           {/* <CFDTeam/> */}
-          <Collaborate/>
+          {/* <Collaborate/> */}
         </main>
         <Footer/>
     </div>
