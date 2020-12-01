@@ -6,6 +6,9 @@ import Home from './pages/home/index';
 import Profile from './pages/profile/index';
 import CourseDetails from './pages/coursedetails/index';
 import Register from './pages/register';
+import RegisterSuccess from './pages/registersuccess';
+import CFDTeam from './pages/cfdteam';
+import Collaborate from './pages/collaborate';
 
 function App() {
   return (
@@ -13,9 +16,12 @@ function App() {
         <Header/>
         <main>
           {/* <Home/> */}
-        {/* <Profile/> */}
-        {/* <CourseDetails/> */}
-        <Register/>
+          {/* <Profile/> */}
+          {/* <CourseDetails/> */}
+          {/* <Register/> */}
+          {/* <RegisterSuccess/> */}
+          {/* <CFDTeam/> */}
+          <Collaborate/>
         </main>
         <Footer/>
     </div>
