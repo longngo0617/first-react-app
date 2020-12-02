@@ -9,6 +9,8 @@ import Register from './pages/register';
 import RegisterSuccess from './pages/registersuccess';
 import CFDTeam from './pages/cfdteam';
 import Collaborate from './pages/collaborate';
+import PaymentInfo from './pages/payment-info';
+import Project from './pages/project';
 
 function App() {
   return (
@@ -16,12 +18,14 @@ function App() {
         <Header/>
         <main>
           {/* <Home/> */}
-          <Profile/>
+          {/* <Profile/> */}
           {/* <CourseDetails/> */}
           {/* <Register/> */}
           {/* <RegisterSuccess/> */}
           {/* <CFDTeam/> */}
           {/* <Collaborate/> */}
+          {/* <PaymentInfo/> */}
+          <Project/>
         </main>
         <Footer/>
     </div>
