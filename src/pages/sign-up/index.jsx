@@ -5,6 +5,8 @@ const SignUp = () => {
     name: "",
     phone: "",
     email: "",
+    password: "",
+    repassword: "",
   });
 
   function handleSubmit() {
@@ -32,7 +34,7 @@ const SignUp = () => {
     });
   }
   return (
-    <div className="section login">
+    <div className="section sign-up">
       <div className="wrap">
         <form id="login">
           <div className="ct_login">
@@ -40,30 +42,40 @@ const SignUp = () => {
             <input
               name="name"
               type="text"
+              onChange={inputChange}
+              value={form.name}
               placeholder="Họ và tên"
             />
             <input
               name="phone"
               type="text"
+              onChange={inputChange}
+              value={form.phone}
               placeholder="Số điện thoại"
             />
             <input
               name="email"
-              type="text"
+              type="email"
+              onChange={inputChange}
+              value={form.email}
               placeholder="Email"
             />
             <input
               name="password"
               type="password"
+              onChange={inputChange}
+              value={form.password}
               placeholder="Mật khẩu"
             />
             <input
               name="repassword"
               type="password"
+              onChange={inputChange}
+              value={form.repassword}
               placeholder="Xác nhận mật khẩu"
             />
             <p className="mess-error" id="message_login"></p>
-            <div className="btn btn-login btn-register">đăng ký</div>
+            <div onClick={handleSubmit} className="btn btn-login btn-register">đăng ký</div>
             <div className="text-register" style={{ fontWeight: 700 }}>
               <strong>Hoặc đăng ký bằng</strong>
             </div>

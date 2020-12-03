@@ -1,4 +1,26 @@
+import {useState} from 'react';
 const SignIn = () => {
+  let [form, setForm] = useState({
+    account: "",
+    password: "",
+  });
+
+  function handleSubmit() {
+    let flag = true;
+    if (form.account === "" || form.account == null) {
+      console.log("Ten khong duoc bo trong");
+      flag = false;
+    }
+    if (flag) {
+      console.log("Submit");
+    }
+  }
+  function inputChange(e) {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
+  }
   return (
     <div className="section login">
       <div className="wrap">
@@ -8,9 +30,17 @@ const SignIn = () => {
             <input
               name="email"
               type="text"
+              onChange={inputChange}
+              value={form.account}
               placeholder="Email / Số điện thoại"
             />
-            <input name="password" type="password" placeholder="Mật khẩu" />
+            <input
+              name="password"
+              onChange={inputChange}
+              type="password"
+              value={form.password}
+              placeholder="Mật khẩu"
+            />
             <p className="mess-error" id="message_login"></p>
             <div className="remember">
               <label className="btn-remember">
@@ -27,8 +57,10 @@ const SignIn = () => {
                 Quên mật khẩu?
               </a>
             </div>
-            <div className="btn btn-login btn-register">đăng nhập</div>
-            <div className="text-register" style={{fontWeight: 700}}>
+            <div onClick={handleSubmit} className="btn btn-login btn-register">
+              đăng nhập
+            </div>
+            <div className="text-register" style={{ fontWeight: 700 }}>
               <strong>Hoặc đăng nhập bằng</strong>
             </div>
             <div>

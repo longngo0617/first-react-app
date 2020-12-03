@@ -1,5 +1,6 @@
 
 import {useState} from 'react';
+import {useLocation} from 'react-router-dom'
 const Register = () => {
     let [form,setForm] = useState({
         name: '',
@@ -9,7 +10,12 @@ const Register = () => {
         payment: '',
         note: '',
     });
-
+    function useQuery() {
+      return new URLSearchParams(useLocation().search);
+    }
+    let query = useQuery();
+    console.log(query.get("khoa-hoc"))
+    
     function handleSubmit() {
         let flag=true;
         if(form.name ==='' || form.name ==null)
