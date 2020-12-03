@@ -38,7 +38,7 @@ const InfoStudent = () => {
     }
   }
   return (
-    <div className="tab__content-1 tabct active" style={{ display: "block" }}>
+    <div className="tab__content-1 tabct">
       <form action="/" method="POST">
         <div className="field">
           <label>Họ và Tên</label>

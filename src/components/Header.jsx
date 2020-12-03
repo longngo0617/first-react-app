@@ -1,9 +1,29 @@
+import { Link } from "react-router-dom";
+
 const Header = () => {
+  
+  const body = document.getElementsByTagName("body")[0];
+  function toggleMenu() { 
+    body.classList.toggle("menu-is-show");
+    if (body.classList.contains("menu-is-show")) {
+      document.getElementsByTagName("main")[0].style.marginLeft = "250px";
+      body.style.overflow = "hidden";
+    } else {
+      document.getElementsByTagName("main")[0].style.marginLeft = "0";
+      body.removeAttribute("style");
+    }
+  }
+  function linkChange(){
+    body.classList.toggle("menu-is-show");
+    document.getElementsByTagName("main")[0].style.marginLeft = "0";
+    body.removeAttribute("style");
+  }
+
   return (
     <>
       <header>
         <div className="container-fluid">
-          <div className="menu">
+          <div className="menu" onClick={toggleMenu}>
             <div className="burger">
               <span></span>
               <span></span>
@@ -11,35 +31,35 @@ const Header = () => {
             </div>
             <div className="text">Menu</div>
           </div>
-          <a href="#" className="logo">
+          <Link  to="/" className="logo">
             <img src="/img/logo.svg" alt="black" />
-          </a>
+          </Link>
           <div className="user">
-            <a href="#" className="btn btn-signin">
+            <Link  to="/sign-in" className="btn btn-signin">
               Đăng nhập
-            </a>
-            <a href="#" className="btn btn-register">
+            </Link>
+            <Link  to="/sign-up" className="btn btn-register">
               Đăng ký
-            </a>
+            </Link>
           </div>
         </div>
       </header>
       <nav className="nav">
         <ul>
           <li>
-            <a href="#">Trang chủ</a>
+            <Link onClick={linkChange} to="/">Trang chủ</Link>
           </li>
           <li>
-            <a href="#">Khóa học</a>
+            <Link onClick={linkChange} to="/chi-tiet-khoa-hoc">Khóa học</Link>
           </li>
           <li>
-            <a href="#">CFD Team</a>
+            <Link onClick={linkChange} to="/cfd-team">CFD Team</Link>
           </li>
           <li>
-            <a href="#">Hỏi đáp</a>
+            <Link onClick={linkChange} to="/profile">Profile</Link>
           </li>
           <li>
-            <a href="#">Hợp tác</a>
+            <Link onClick={linkChange} to="/hop-tac">Hợp tác</Link>
           </li>
         </ul>
       </nav>

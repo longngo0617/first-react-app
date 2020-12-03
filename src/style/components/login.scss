@@ -1,0 +1,91 @@
+.login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .wrap {
+        width: 560px;
+        background: #fff;
+        padding: 50px 70px;
+        position: relative;
+        .title {
+            font-size: 22px;
+            line-height: 31px;
+            letter-spacing: 0em;
+            text-align: center;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+        }
+        input {
+            flex: 1;
+            height: 58px;
+            font-size: 16px;
+            padding: 0 20px;
+            width: 100%;
+            margin-bottom: 15px;
+            outline: none;
+            border: 1px solid #dbe0df;
+        }
+        .remember {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 14px;
+            .btn-remember {
+                display: flex;
+                align-items: center;
+                width: 100%;
+                cursor: pointer;
+                input {
+                    width: auto;
+                    appearance: auto;
+                    height: auto;
+                    margin: 0 10px 5px 0;
+                    position: relative;
+                    bottom: -1px;
+                }
+                p{
+                    flex: 1;
+                    font-style: normal;
+                    line-height: 20px;
+                    user-select: none;
+                }
+            }
+            .forget {
+                white-space: nowrap;
+                color: #00afab;
+            }
+           
+        }
+        .text-register{
+            margin: 30px 0 15px 0;
+        }
+        .btn-login {
+            width: 100%;
+            margin-top: 20px;
+            height: 54px;
+            line-height: 54px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        .btn-google {
+            background: #fff;
+            text-transform: capitalize;
+            width: 100%;
+            color: #222;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background .3s ;
+            &:hover {
+                background: #e0e0e0;
+            }
+            img {
+                width: 20px;
+                margin: 0 10px 0 0;
+            }
+        }
+    }
+}

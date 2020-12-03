@@ -2,8 +2,9 @@ import InfoStudent from "./components/InfoStudent";
 import CourseStudent from "./components/CourseStudent";
 import ProjectStudent from "./components/ProjectStudent";
 import PaymentStudent from "./components/PaymentStudent";
-
+import { Switch, Route,NavLink,useRouteMatch } from "react-router-dom";
 const Profile = () => {
+  let { url } = useRouteMatch();
   return (
     <>
       <section className="section top-info">
@@ -17,18 +18,26 @@ const Profile = () => {
         <div className="container">
           <div className="tab">
             <div className="tab__title">
-              <a href="#" className="js-tab-active">
-                Thông tin tài khoản
-              </a>
-              <a href="#">Khoá học của tôi</a>
-              <a href="#">Dự án đã làm</a>
-              <a href="#">Lịch sử thanh toán</a>
+              <NavLink exact to={`${url}`}>Thông tin tài khoản </NavLink>
+              <NavLink to={`${url}/khoa-hoc`}>Khoá học của tôi</NavLink>
+              <NavLink to={`${url}/project`}>Dự án đã làm</NavLink>
+              <NavLink to={`${url}/payment`}>Lịch sử thanh toán</NavLink>
             </div>
             <div className="tab__content">
-                <InfoStudent/>
-                <CourseStudent/>
-                <ProjectStudent/>
-                <PaymentStudent/>
+              <Switch>
+                <Route path={`${url}/khoa-hoc`}>
+                  <CourseStudent />
+                </Route>
+                <Route path={`${url}/project`}>
+                  <ProjectStudent />
+                </Route>
+                <Route path={`${url}/payment`}>
+                  <PaymentStudent />
+                </Route>
+                <Route exact path={`${url}`}>
+                  <InfoStudent />
+                </Route>
+              </Switch>
             </div>
           </div>
         </div>

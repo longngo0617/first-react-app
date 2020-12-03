@@ -1,6 +1,6 @@
 const PaymentStudent = () => {
   return (
-    <div className="tab__content-4 tabct" style={{ display: "none" }}>
+    <div className="tab__content-4 tabct">
       <div className="payment__table">
         <div className="payment__row">
           <p className="name">Khóa học CFD1-offline</p>

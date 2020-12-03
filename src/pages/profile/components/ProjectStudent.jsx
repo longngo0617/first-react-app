@@ -3,10 +3,15 @@ import CourseCard from './../../../components/CourseCard';
 
 const ProjectStudent = () => {
   return (
-    <div className="tab__content-3 tabct" style={{ display: "none" }}>
+    <div className="tab__content-3 tabct">
       <div className="list__project">
             <CourseCard
                 tile="Furnitown"
+                des ="Dự án hoàn thành trong khóa CFD1 Offline của CFD Team."
+                image ="/img/img-project.jpg"
+            />
+            <CourseCard
+                tile="GMBOX"
                 des ="Dự án hoàn thành trong khóa CFD1 Offline của CFD Team."
                 image ="/img/img-project.jpg"
             />

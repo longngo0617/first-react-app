@@ -1,5 +1,5 @@
 
-import {useState} from 'react'
+import {useState} from 'react';
 const Register = () => {
     let [form,setForm] = useState({
         name: '',

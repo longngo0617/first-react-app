@@ -1,6 +1,6 @@
 const CourseStudent = () => {
   return (
-    <div className="tab__content-2 tabct" style={{ display: "none" }}>
+    <div className="tab__content-2 tabct">
       <div className="course">
         <a href="#" className="course__image">
           <img src="/img/img-course-1.jpg" alt="" />

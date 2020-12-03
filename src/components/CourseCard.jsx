@@ -1,9 +1,11 @@
+import {Link} from 'react-router-dom';
+
 const CourseCard = ({ title, des, image }) => {
   return (
     <div className="col-md-4 course__item">
-      <a className="course__item-img">
+      <Link to="/chi-tiet-khoa-hoc" className="course__item-img">
         <img src={image} alt="alter" />
-      </a>
+      </Link>
       <div className="course__item-info">
         <div className="course__item-wrap">
           <h2 className="course__item-title">{title}</h2>
@@ -18,9 +20,9 @@ const CourseCard = ({ title, des, image }) => {
             </div>
             <div className="name">Trần Nghĩa</div>
           </div>
-          <a href="#" className="btn btn-register">
+          <Link to="/dang-ky-khoa-hoc" className="btn btn-register">
             Đăng ký
-          </a>
+          </Link>
         </div>
       </div>
     </div>
