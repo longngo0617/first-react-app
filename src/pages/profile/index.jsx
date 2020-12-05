@@ -1,10 +1,12 @@
+import { Switch, Route, NavLink, useRouteMatch } from "react-router-dom";
 import InfoStudent from "./components/InfoStudent";
 import CourseStudent from "./components/CourseStudent";
 import ProjectStudent from "./components/ProjectStudent";
 import PaymentStudent from "./components/PaymentStudent";
-import { Switch, Route,NavLink,useRouteMatch } from "react-router-dom";
+
 const Profile = () => {
   let { url } = useRouteMatch();
+
   return (
     <>
       <section className="section top-info">
@@ -18,10 +20,18 @@ const Profile = () => {
         <div className="container">
           <div className="tab">
             <div className="tab__title">
-              <NavLink exact to={`${url}`}>Thông tin tài khoản </NavLink>
-              <NavLink to={`${url}/khoa-hoc`}>Khoá học của tôi</NavLink>
-              <NavLink to={`${url}/project`}>Dự án đã làm</NavLink>
-              <NavLink to={`${url}/payment`}>Lịch sử thanh toán</NavLink>
+              <NavLink exact to={`${url}`} activeClassName="js-tab-active">
+                Thông tin tài khoản{" "}
+              </NavLink>
+              <NavLink to={`${url}/khoa-hoc`} activeClassName="js-tab-active">
+                Khoá học của tôi
+              </NavLink>
+              <NavLink to={`${url}/project`} activeClassName="js-tab-active">
+                Dự án đã làm
+              </NavLink>
+              <NavLink to={`${url}/payment`} activeClassName="js-tab-active">
+                Lịch sử thanh toán
+              </NavLink>
             </div>
             <div className="tab__content">
               <Switch>

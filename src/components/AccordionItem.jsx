@@ -1,3 +1,4 @@
+
 const AccordionItem = ({title, des,info}) => {
   return (
     <div className="item__course">

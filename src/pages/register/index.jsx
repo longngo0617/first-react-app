@@ -1,55 +1,58 @@
+import { useForm } from "../../hooks/useForm";
 
-import {useState} from 'react';
-import {useLocation} from 'react-router-dom'
 const Register = () => {
-    let [form,setForm] = useState({
-        name: '',
-        phone: '',
-        email: '',
-        facebook: '',
-        payment: '',
-        note: '',
-    });
-    function useQuery() {
-      return new URLSearchParams(useLocation().search);
+  let { data, errors, inputChange, Submit } = useForm(
+    {
+      name: "",
+      phone: "",
+      email: "",
+      facebook: "",
+      payment: "",
+      note: "",
+    },
+    {
+      validate: {
+        name: {
+          required: true,
+        },
+        email: {
+          required: true,
+          pattern: "email",
+        },
+        phone: {
+          required: true,
+          pattern: "phone",
+        },
+        facebook: {
+          required: true,
+          pattern: "url",
+        },
+      },
+      message: {
+        name: {
+          required: "Họ tên là bắt buộc",
+        },
+        phone: {
+          required: "Số điện thoại là bắt buộc",
+          pattern: "Số điện thoại không đúng định dạng",
+        },
+        email: {
+          required: "Email là bắt buộc",
+          pattern: "Email không đúng định dạng",
+        },
+        facebook: {
+          required: "Facebook là bắt buộc",
+          pattern: "Link Facebook không đúng định dạng",
+        },
+      },
     }
-    let query = useQuery();
-    console.log(query.get("khoa-hoc"))
-    
-    function handleSubmit() {
-        let flag=true;
-        if(form.name ==='' || form.name ==null)
-        {
-            console.log("Ten khong duoc bo trong");
-            flag=false;
-        }
-        if(!/(03|07|08|09|01[2|6|8|9])+([0-9]{8})\b/.test(form.phone))
-        {
-            console.log("So dien thoai khong dung dinh dang");
-            flag=false;
-        }
-        if(!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(form.email))
-        {
-            console.log("Email kh dung dinh dang");
-            flag=false;
-        }
-        if(form.facebook === '' || form.facebook == null || !/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/.test(form.facebook))
-        {
-            console.log("Link facebook kh dung dinh dang");
-            flag=false;
-        }
-        if(flag)
-        {
-            console.log("Submit");
-        }
-    } 
-    
-    function inputChange(e) {
-        setForm({
-            ...form,
-            [e.target.name] : e.target.value
-        });
+  );
+  function handleSubmit() {
+    let er = Submit();
+    if (!er) {
+      console.log("call ajax");
     }
+  }
   return (
     <section className="section register">
       <div className="container">
@@ -58,7 +61,15 @@ const Register = () => {
           <h2 className="type">thực chiến front-end căn bản </h2>
         </div>
         <div className="register__wrap">
-          <form action="/" method="POST" className="register__form">
+          <form
+            action="/"
+            method="POST"
+            className="register__form"
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleSubmit();
+            }}
+          >
             <div className="field">
               <label>
                 Họ và Tên<span>*</span>
@@ -67,9 +78,10 @@ const Register = () => {
                 onChange={inputChange}
                 type="text"
                 name="name"
-                value={form.name}
+                value={data.name}
                 placeholder="Họ và tên bạn"
               />
+              {errors.name && <p className="input-errors">{errors.name}</p>}
             </div>
             <div className="field">
               <label>
@@ -79,9 +91,10 @@ const Register = () => {
                 onChange={inputChange}
                 type="text"
                 name="phone"
-                value={form.phone}
+                value={data.phone}
                 placeholder="Số điện thoại"
               />
+              {errors.phone && <p className="input-errors">{errors.phone}</p>}
             </div>
             <div className="field">
               <label>
@@ -91,9 +104,10 @@ const Register = () => {
                 onChange={inputChange}
                 type="text"
                 name="email"
-                value={form.email}
+                value={data.email}
                 placeholder="Email của bạn"
               />
+              {errors.email && <p className="input-errors">{errors.email}</p>}
             </div>
             <div className="field">
               <label>
@@ -103,9 +117,12 @@ const Register = () => {
                 onChange={inputChange}
                 type="text"
                 name="facebook"
-                value={form.facebook}
+                value={data.facebook}
                 placeholder="https://facebook.com"
               />
+              {errors.facebook && (
+                <p className="input-errors">{errors.facebook}</p>
+              )}
             </div>
             <div className="field">
               <label>Hình thức thanh toán</label>
@@ -113,7 +130,7 @@ const Register = () => {
                 onChange={inputChange}
                 type="text"
                 name="payment"
-                value={form.payment}
+                value={data.payment}
                 placeholder="Chuyển khoản"
               />
             </div>
@@ -123,11 +140,13 @@ const Register = () => {
                 onChange={inputChange}
                 type="text"
                 name="note"
-                value={form.note}
+                value={data.note}
                 placeholder="Định hướng và mong muốn của bạn"
               />
             </div>
-            <div onClick={handleSubmit} className="btn-register btn-save">ĐĂNG KÝ</div>
+            <button type="submit" className="btn-register btn-save">
+              ĐĂNG KÝ
+            </button>
           </form>
         </div>
       </div>

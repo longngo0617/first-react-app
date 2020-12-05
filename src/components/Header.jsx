@@ -1,17 +1,29 @@
+import React,{useState,useEffect} from 'react';
 import { Link } from "react-router-dom";
+import { useAuth } from '../hooks/useAuth';
 
 const Header = () => {
-  
+  let[menuState,setMenuState] = useState(false);
+  let {user} =useAuth();
   const body = document.getElementsByTagName("body")[0];
-  function toggleMenu() { 
-    body.classList.toggle("menu-is-show");
-    if (body.classList.contains("menu-is-show")) {
-      document.getElementsByTagName("main")[0].style.marginLeft = "250px";
-      body.style.overflow = "hidden";
-    } else {
+  
+  useEffect(() => {
+    if(!menuState)
+    {
       document.getElementsByTagName("main")[0].style.marginLeft = "0";
       body.removeAttribute("style");
+      body.classList.remove("menu-is-show");
     }
+    else {
+      document.getElementsByTagName("main")[0].style.marginLeft = "250px";
+      body.style.overflow = "hidden";
+      body.classList.add("menu-is-show");
+    }
+  }, [menuState])
+
+  
+  function toggleMenu() {
+    setMenuState(!menuState) 
   }
   function linkChange(){
     body.classList.toggle("menu-is-show");
@@ -34,7 +46,9 @@ const Header = () => {
           <Link  to="/" className="logo">
             <img src="/img/logo.svg" alt="black" />
           </Link>
-          <div className="user">
+          {
+            user.name ? <div>{user.name}</div> :
+            <div className="user">
             <Link  to="/sign-in" className="btn btn-signin">
               Đăng nhập
             </Link>
@@ -42,6 +56,7 @@ const Header = () => {
               Đăng ký
             </Link>
           </div>
+          }
         </div>
       </header>
       <nav className="nav">

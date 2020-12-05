@@ -1,26 +1,38 @@
 import {useState} from 'react';
+import { useAuth } from '../../hooks/useAuth';
+import { useForm } from '../../hooks/useForm';
 const SignIn = () => {
-  let [form, setForm] = useState({
-    account: "",
-    password: "",
-  });
+
+  let {user,setUser} = useAuth();
+  let {data,errors,inputChange,Submit} = useForm({
+    email: "",
+  },
+  {
+    validate: {
+      email: {
+        required: true,
+        pattern: "email",
+      },
+    },
+    message: {
+      email: {
+        required:'Tai khoan khong dung',
+        pattern :'Email không đúng định dạng'
+      },
+    }
+  })
 
   function handleSubmit() {
-    let flag = true;
-    if (form.account === "" || form.account == null) {
-      console.log("Ten khong duoc bo trong");
-      flag = false;
-    }
-    if (flag) {
-      console.log("Submit");
+    let er = Submit();
+    if(!er){
+      setUser({
+        ...user,
+        name:'Ngo Thanh Long',
+        login:true
+      })
     }
   }
-  function inputChange(e) {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value,
-    });
-  }
+
   return (
     <div className="section login">
       <div className="wrap">
@@ -31,14 +43,15 @@ const SignIn = () => {
               name="email"
               type="text"
               onChange={inputChange}
-              value={form.account}
+              value={data.account}
               placeholder="Email / Số điện thoại"
             />
+            {errors.email && <p className="input-errors">{errors.email}</p>}
             <input
               name="password"
               onChange={inputChange}
               type="password"
-              value={form.password}
+              value={data.password}
               placeholder="Mật khẩu"
             />
             <p className="mess-error" id="message_login"></p>

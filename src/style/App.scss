@@ -2,3 +2,14 @@
 @import "./breakpoints.scss";
 @import "./components/page404.scss";
 @import "./components/login.scss";
+
+
+.input-errors {
+    font-size: 14px;
+    color:red;
+    font-style: italic;
+    width: 100%;
+}
+.field {
+    flex-wrap:wrap;
+}

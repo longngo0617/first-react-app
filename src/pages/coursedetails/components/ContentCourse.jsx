@@ -103,7 +103,7 @@ const ContentCourse = () => {
               viên.
             </span>
           </h2>
-          <p style={{textAlign: "left"}}>
+          <p style={{ textAlign: "left" }}>
             <strong>Ngày bắt đầu: </strong> 23/11/2020 <br />
             <strong>Thời gian học: </strong> Thứ 2, Thứ 4, Thứ 6 từ 18h45-21h45
           </p>
