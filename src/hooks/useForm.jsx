@@ -5,6 +5,8 @@ const useForm = (initValue, rules) => {
   const patternURL = /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/;
   let [form, setForm] = useState(initValue);
   let [errors, setErrors] = useState({});
+  let inputRef = useRef(form);
+
   function inputChange(e) {
     setForm({
       ...form,

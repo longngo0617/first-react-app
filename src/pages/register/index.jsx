@@ -1,7 +1,7 @@
 import { useForm } from "../../hooks/useForm";
 
 const Register = () => {
-  let { data, errors, inputChange, Submit } = useForm(
+  let { data, errors, inputChange, Submit} = useForm(
     {
       name: "",
       phone: "",
