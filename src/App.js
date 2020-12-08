@@ -56,6 +56,7 @@ function App() {
               <PrivateRouter path="/profile">
                 <Profile />
               </PrivateRouter>
+              <PrivateRouter path="/dang-ky-khoa-hoc" Component={Register} />
               {routes.map(({ path, Component }) => (
                 <Route key={path} exact path={path}>
                   <Component />

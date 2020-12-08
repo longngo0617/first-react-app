@@ -1,44 +1,58 @@
 import {useState} from 'react';
-import { useAuth } from '../../hooks/useAuth';
-import { useForm } from '../../hooks/useForm';
+import { Redirect } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
+import { useForm } from "../../hooks/useForm";
 const SignIn = () => {
-
-  let {user,setUser} = useAuth();
-  let {data,errors,inputChange,Submit} = useForm({
-    email: "",
-  },
-  {
-    validate: {
-      email: {
-        required: true,
-        pattern: "email",
-      },
+  let { user, login } = useAuth();
+  let [errMessage, setErrMessage] = useState('');
+  
+  let { data, errors, inputChange, Submit } = useForm(
+    {
+      email: "",
+      password: "",
     },
-    message: {
-      email: {
-        required:'Tai khoan khong dung',
-        pattern :'Email không đúng định dạng'
+    {
+      validate: {
+        email: {
+          required: true,
+          pattern: "email",
+        },
+        password: {
+          required: true,
+        },
+      },
+      message: {
+        email: {
+          required: "Tai khoan khong dung",
+          pattern: "Email không đúng định dạng",
+        },
+        password: {
+          required: "Mat khau khong dung",
+        },
       },
     }
-  })
+  );
 
   function handleSubmit() {
     let er = Submit();
-    if(!er){
-      setUser({
-        ...user,
-        name:'Ngo Thanh Long',
-        login:true
+    if (!er) {
+      login(data)
+      .then(error => {
+        if(error)
+        {
+          setErrMessage('Email hoac mat khau khong dung');
+        }
       })
     }
   }
-
+  if (user.email) return <Redirect to="/" />;
   return (
     <div className="section login">
       <div className="wrap">
         <form id="login">
           <div className="ct_login">
             <h2 className="title">Đăng nhập</h2>
+            {errMessage && <h3>{errMessage}</h3>}
             <input
               name="email"
               type="text"
@@ -54,6 +68,7 @@ const SignIn = () => {
               value={data.password}
               placeholder="Mật khẩu"
             />
+            {errors.password && <p className="input-errors">{errors.password}</p>}
             <p className="mess-error" id="message_login"></p>
             <div className="remember">
               <label className="btn-remember">

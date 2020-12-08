@@ -29,6 +29,7 @@ const Header = () => {
     body.classList.toggle("menu-is-show");
     document.getElementsByTagName("main")[0].style.marginLeft = "0";
     body.removeAttribute("style");
+    setMenuState(!menuState);
   }
 
   return (
@@ -47,7 +48,7 @@ const Header = () => {
             <img src="/img/logo.svg" alt="black" />
           </Link>
           {
-            user.name ? <div>{user.name}</div> :
+            user._id ? <div>{user.email}</div> :
             <div className="user">
             <Link  to="/sign-in" className="btn btn-signin">
               Đăng nhập

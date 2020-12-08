@@ -26,7 +26,7 @@ const Profile = () => {
               <NavLink to={`${url}/khoa-hoc`} activeClassName="js-tab-active">
                 Khoá học của tôi
               </NavLink>
-              <NavLink to={`${url}/project`} activeClassName="js-tab-active">
+              <NavLink to={`${url}/project-student`} activeClassName="js-tab-active">
                 Dự án đã làm
               </NavLink>
               <NavLink to={`${url}/payment`} activeClassName="js-tab-active">
@@ -38,7 +38,7 @@ const Profile = () => {
                 <Route path={`${url}/khoa-hoc`}>
                   <CourseStudent />
                 </Route>
-                <Route path={`${url}/project`}>
+                <Route path={`${url}/project-student`}>
                   <ProjectStudent />
                 </Route>
                 <Route path={`${url}/payment`}>

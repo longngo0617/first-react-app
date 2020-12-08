@@ -1,11 +1,11 @@
-import  { useState,useRef } from "react";
+import  { useState } from "react";
 const useForm = (initValue, rules) => {
   const patternEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
   const patternPhone = /(03|07|08|09|01[2|6|8|9])+([0-9]{8})\b/;
   const patternURL = /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/;
   let [form, setForm] = useState(initValue);
   let [errors, setErrors] = useState({});
-  let inputRef = useRef(form);
+
 
   function inputChange(e) {
     setForm({
@@ -29,7 +29,7 @@ const useForm = (initValue, rules) => {
           if (validate[i].pattern === "email") pattern = patternEmail;
           if (validate[i].pattern === "phone") pattern = patternPhone;
           if (validate[i].pattern === "url") pattern = patternURL;
-
+          
           if (!pattern.test(form[i])) {
             errorObj[i] = message?.[i]?.pattern || "Không đúng định dạng";
           }
