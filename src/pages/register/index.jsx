@@ -1,6 +1,14 @@
+import {useEffect,useState} from 'react';
+import { useRouteMatch } from "react-router-dom";
+import Api from '../../components/Api';
+import { useAuth } from '../../hooks/useAuth';
 import { useForm } from "../../hooks/useForm";
-
+import LoadingPage from '../../components/LoadingPage';
 const Register = () => {
+  let routeMatch = useRouteMatch();
+  let [course,setCourse]= useState(false);
+  let[loading,setLoading] = useState(true);
+  let {user} =useAuth();
   let { data, errors, inputChange, Submit} = useForm(
     {
       name: "",
@@ -53,12 +61,25 @@ const Register = () => {
       console.log("call ajax");
     }
   }
+  useEffect(()=> {
+    if(!course){
+      Api(`rest/elearning_course/${routeMatch.params.id}`).get()
+      .then(res=> {
+        if(res) {
+          setCourse(res);
+          setLoading(false);
+        }
+      })
+    }
+  },[])
+  
+  if(loading ) return <LoadingPage/>
   return (
     <section className="section register">
       <div className="container">
         <div className="course">
           <h2 className="title">đăng ký</h2>
-          <h2 className="type">thực chiến front-end căn bản </h2>
+          <h2 className="type">{course.title} - {course.course_type ==='offline'?'Offline':'Online'} </h2>
         </div>
         <div className="register__wrap">
           <form
@@ -78,7 +99,7 @@ const Register = () => {
                 onChange={inputChange}
                 type="text"
                 name="name"
-                value={data.name}
+                value={user.title}
                 placeholder="Họ và tên bạn"
               />
               {errors.name && <p className="input-errors">{errors.name}</p>}
@@ -104,7 +125,7 @@ const Register = () => {
                 onChange={inputChange}
                 type="text"
                 name="email"
-                value={data.email}
+                value={user.email}
                 placeholder="Email của bạn"
               />
               {errors.email && <p className="input-errors">{errors.email}</p>}

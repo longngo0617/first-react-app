@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-
+import Api from '../components/Api';
 let UserContext = React.createContext();
 const useAuth = () => {
   return useContext(UserContext);
@@ -8,6 +8,16 @@ const UserProvider = ({ children }) => {
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(true);
 
+  function getInfo() {
+    Api('api/get-user-info').get()
+    .then(res=> {
+      if(res && res.accessToken) {
+        setUser(res);
+        localStorage.set('user',res);
+        setLoading(false);
+      }
+    })
+  }
   function login(user) {
     return fetch("https://cfd-reactjs.herokuapp.com/api/login", {
       method: "POST",

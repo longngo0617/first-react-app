@@ -1,11 +1,12 @@
 import { useState } from "react";
 
 const InfoStudent = () => {
+  let user = JSON.parse(localStorage.getItem("user"));
   let [form, setForm] = useState({
-    name: "Tran Nghia",
-    phone: "0989596813",
-    facebook: "https://facebook.com",
-    skype: "trannghia2018",
+    name: "",
+    phone: "",
+    facebook: "",
+    skype: "",
   });
 
   function inputChange(e) {

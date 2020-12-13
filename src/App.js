@@ -22,7 +22,7 @@ import PrivateRouter from "./components/PrivateRouter";
 const routes = [
   { path: "/", name: "Home", Component: Home },
   {
-    path: "/chi-tiet-khoa-hoc",
+    path: "/chi-tiet-khoa-hoc/:slug-p:id",
     name: "Course Details",
     Component: CourseDetails,
   },
@@ -30,7 +30,6 @@ const routes = [
   { path: "/hop-tac", name: "Hop Tac", Component: Collaborate },
   { path: "/sign-in", name: "Dang Nhap", Component: SignIn },
   { path: "/sign-up", name: "Dang Ky", Component: SignUp },
-  { path: "/dang-ky-khoa-hoc", name: "Dang Ky Khoa Hoc", Component: Register },
   {
     path: "/dang-ky-khoa-hoc-thanh-cong",
     name: "Dang Ky Khoa Hoc Thanh Cong",
@@ -50,21 +49,19 @@ function App() {
     <>
       <UserProvider>
         <Header />
-        <div className="App">
-          <main>
-            <Switch>
-              <PrivateRouter path="/profile">
-                <Profile />
-              </PrivateRouter>
-              <PrivateRouter path="/dang-ky-khoa-hoc" Component={Register} />
-              {routes.map(({ path, Component }) => (
-                <Route key={path} exact path={path}>
-                  <Component />
-                </Route>
-              ))}
-            </Switch>
-          </main>
-        </div>
+        <main>
+          <Switch>
+            <PrivateRouter path="/profile">
+              <Profile />
+            </PrivateRouter>
+            <PrivateRouter path="/dang-ky/:slug-p:id" component={Register} />
+            {routes.map(({ path, Component }) => (
+              <Route key={path} exact path={path}>
+                <Component />
+              </Route>
+            ))}
+          </Switch>
+        </main>
         <Footer />
       </UserProvider>
     </>

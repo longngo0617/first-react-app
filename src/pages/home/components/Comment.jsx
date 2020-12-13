@@ -1,3 +1,70 @@
+import React from "react";
+import Flickity from "react-flickity-component";
+const flickityOptions = {
+  // cellAlign: "left",
+  draggable: false,
+  prevNextButtons: false,
+  freeScroll: true,
+  wrapAround: true,
+  // lazyLoad: 1,
+  // on: {
+  //   ready: function () {
+  //     let dotted = document.querySelector(".flickity-page-dots"),
+  //       paging = document.querySelector(".comment .list-dots");
+  //     paging.appendChild(dotted);
+  //   },
+  // },
+};
+let crIndex = 0;
+const lstText = document.querySelectorAll(".text .text-item");
+const textMove = (i) => {
+  let textCr = lstText[crIndex];
+  let nextText = lstText[i];
+
+  textCr.classList.remove("js-comment-active");
+  nextText.classList.add("js-comment-active");
+
+  crIndex = i;
+};
+function Carousel() {
+  return (
+    <Flickity
+      className={"images"} // default ''
+      elementType={"div"} // default 'div'
+      options={flickityOptions} // takes flickity options {}
+      disableImagesLoaded={false} // default false
+      reloadOnUpdate // default false
+      static // default false
+    >
+      <div className="img">
+        <img src="img/member-1.jpg" alt="" />
+      </div>
+      <div className="img">
+        <img src="img/img-member2.jpg" alt="" />
+      </div>
+      <div className="img">
+        <img src="img/img-member3.jpg" alt="" />
+      </div>
+      <div className="img">
+        <img src="img/img-member4.jpg" alt="" />
+      </div>
+    </Flickity>
+  );
+}
+function nextSlide() {
+  if (crIndex < lstText.length - 1) {
+    textMove(crIndex + 1);
+  } else {
+    textMove(0);
+  }
+}
+function prevSlide() {
+  if (crIndex > 0) {
+    textMove(crIndex - 1);
+  } else {
+    textMove(lstText.length - 1);
+  }
+}
 const Comment = () => {
   return (
     <section className="section comment">
@@ -105,7 +172,8 @@ const Comment = () => {
                   </div>
                 </div>
               </div>
-              <div className="images">
+              <Carousel />
+              {/* <div className="images">
                 <div className="img">
                   <img src="img/member-1.jpg" alt="" />
                 </div>
@@ -118,11 +186,11 @@ const Comment = () => {
                 <div className="img">
                   <img src="img/img-member4.jpg" alt="" />
                 </div>
-              </div>
+              </div> */}
             </div>
             <div className="list-dots"></div>
-            <div className="button button__left"></div>
-            <div className="button button__right"></div>
+            <div className="button button__left" onClick={prevSlide}></div>
+            <div className="button button__right" onClick={nextSlide}></div>
           </div>
         </div>
       </div>

@@ -35,7 +35,7 @@ const cacheTokenExpired = async (res, head) => {
       }
     }
   } else {
-    return res;
+    return res.json();
   }
 };
 const Api = (url) => {

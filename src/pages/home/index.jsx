@@ -1,4 +1,4 @@
-import { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
 import Banner from "./components/Banner";
 import SectionCourse from "./components/SectionCourse";
 import Special from "./components/Special";
@@ -9,29 +9,27 @@ import { useAuth } from "../../hooks/useAuth";
 import Api from "../../components/Api";
 
 const Home = () => {
-  let { user } = useAuth();
+  const { user } = useAuth();
   let [course, setCourse] = useState([]);
-
   useEffect(() => {
-    
-    Api("rest/elearning_course", {
-      headers: {
-        Authorization: `Bearer ${user.accessToken}`,
-      },
-    })
-      .get()
-      .then((res) => {
-        if(res.data){
-          setCourse(JSON.stringify(res.data));
-          console.log(course);
-        }
-      });
+    if (course.length === 0) {
+      Api("rest/elearning_course", {
+        headerss: {  
+          Authorization: `Bearer ${user.accessToken}`,
+        },
+      })
+        .get()
+        .then((res) => {
+          if (res && res.data) {
+            setCourse(res.data);
+          }
+        });
+    }
   }, []);
-
   return (
     <>
       <Banner />
-      <SectionCourse />
+      <SectionCourse course={course} />
       <Special />
       <Comment />
       <Team />
